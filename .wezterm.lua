@@ -7,7 +7,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Tokyo Night Storm"
 
 -- This is where you actually apply your config choices.
-config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 14
 
 -- config.enable_tab_bar = false
@@ -33,7 +33,7 @@ config.keys = {
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = "-",
+		key = "0",
 		mods = "CMD",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
