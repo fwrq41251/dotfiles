@@ -7,8 +7,6 @@ vim.keymap.set("n", "vv", "viw", { noremap = true, silent = true })
 -- navigation
 vim.keymap.set("n", ">", "<C-d>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<", "<C-u>zz", { noremap = true, silent = true })
--- add a new line below the current line
-vim.keymap.set("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
 -- paste after the current line
 vim.keymap.set("n", "<C-p>", "$p", { noremap = true, silent = true })
 -- copy until the end of the line
@@ -20,14 +18,10 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv", { noremap = true, silent = true })
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "ddkP", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "ddp", { noremap = true, silent = true })
+-- new line
+vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
 
 vim.g.mapleader = " "
-
--- toggle relativenumber
--- vim.opt.relativenumber = true
--- vim.keymap.set("n", "<leader>l", function()
---   vim.opt.relativenumber = not vim.opt.relativenumber:get()
--- end, { noremap = true, silent = true, desc = "Toggle relative line numbers" })
 
 -- Compile C/C++ files
 vim.keymap.set(
@@ -35,7 +29,7 @@ vim.keymap.set(
   "<F5>",
   function()
     vim.cmd("write")
-    vim.cmd("!gcc % -o %<")
+    vim.cmd("!gcc -g % -o %<")
   end,
   { noremap = true, silent = true, desc = "Compile C/C++ File" }
 )

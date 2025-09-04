@@ -83,6 +83,26 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+function run() {
+    # 获取屏幕分辨率
+    SCREEN_WIDTH=$(system_profiler SPDisplaysDataType | grep Resolution | awk '{print $2}')
+    SCREEN_HEIGHT=$(system_profiler SPDisplaysDataType | grep Resolution | awk '{print $4}')
+
+    # 无限循环
+    while true
+    do
+        # 生成随机 X 和 Y 坐标
+        X=$(( RANDOM % SCREEN_WIDTH ))
+        Y=$(( RANDOM % SCREEN_HEIGHT ))
+
+        # 使用 cliclick 移动鼠标到随机坐标
+        cliclick m:$X,$Y
+
+        # 等待 1 秒钟再移动
+        sleep 60
+    done
+}
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -94,6 +114,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='nvim'
 # fi
+#
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -117,6 +138,15 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH=$HOME/git/flutter/flutter/bin:$PATH
 
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # plugins
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias ls="eza --icons"
+alias ll="eza -lg --icons"
+alias la="eza -lag --icons"

@@ -7,7 +7,14 @@ local config = wezterm.config_builder()
 config.color_scheme = "Tokyo Night Storm"
 
 -- This is where you actually apply your config choices.
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font_with_fallback({
+	-- 1. 你的首选英文字体/编程字体
+	"JetBrainsMono Nerd Font",
+	-- 2. 备选的 CJK 字体，用来显示中文、日文、韩文
+	--    'Sarasa Gothic SC' 是更纱黑体的简体中文版本名，但它包含完整的 CJK 字符。
+	"Sarasa Gothic SC",
+})
 config.font_size = 14
 
 -- config.enable_tab_bar = false
