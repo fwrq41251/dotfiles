@@ -147,6 +147,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias ls="eza --icons"
-alias ll="eza -lg --icons"
-alias la="eza -lag --icons"
+alias ls="eza"
+alias ll="eza -lg"
+alias la="eza -lag"

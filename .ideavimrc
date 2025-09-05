@@ -1,0 +1,92 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+set relativenumber
+set clipboard+=unnamed
+" diable IdeaVim from dialogs
+" set ideavimsupport=
+set surround
+set which-key
+set notimeout
+
+"select word
+nnoremap vv viw
+" navigation
+nnoremap > <C-d>zz
+nnoremap < <C-u>zz
+" add a new line below the current line
+nnoremap <CR> o<Esc>
+" paste after the current line
+nnoremap <C-p> $p
+" copy until the end of the line
+nnoremap Y y$
+" paster and copy to clipboard
+xnoremap p pgvy
+" move lines
+vnoremap <C-k> :m '<-2<CR>gv
+vnoremap <C-j> :m '>+1<CR>gv
+nnoremap <C-k> ddkP
+nnoremap <C-j> ddp
+
+let mapleader = " "
+
+" toggle relativenumber
+nnoremap <leader>l :set relativenumber!<CR>
+" paste from 0 register
+nnoremap <leader>p "0p
+
+" intellij actions
+nmap gi <Action>(GotoImplementation)
+nmap gt <Action>(GotoTypeDeclaration)
+nmap gc <Action>(CommentByLineComment)
+nmap za <Action>(ExpandCollapseToggleAction)
+nmap K <Action>(GotoDeclaration)
+nmap <leader>a <Action>(GotoAction)
+nmap <leader>d <Action>(QuickJavaDoc)
+nmap <leader>p <Action>(ParameterInfo)
+nmap <leader>c <Action>(RefactoringMenu)
+nmap <leader>t <Action>(de.netnexus.CamelCasePlugin.ToggleCamelCase)<Esc>
+nmap <leader>g <Action>(Generate)
+nmap <leader>n <Action>(NewClass)
+nmap <leader>o <Action>(CloseAllEditorsButActive)
+nmap <leader>uz <Action>(ToggleDistractionFreeMode)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>s <Action>(FileStructurePopup)
+nmap <leader>/ <Action>(SearchEverywhere)
+nmap <leader>\ <Action>(SplitVertically)
+nmap [w <Action>(PrevSplitter)
+nmap ]w <Action>(NextSplitter)
+vmap / <Action>(SearchEverywhere)
+nmap = <Action>(SaveAll)
+nmap s <Action>(flash.search)
