@@ -58,6 +58,8 @@ vnoremap <C-k> :m '<-2<CR>gv
 vnoremap <C-j> :m '>+1<CR>gv
 nnoremap <C-k> ddkP
 nnoremap <C-j> ddp
+" select to the end of the line
+nnoremap <C-v> v$
 
 let mapleader = " "
 
