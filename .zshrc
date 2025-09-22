@@ -131,6 +131,11 @@ alias ls="eza --icons"
 alias ll="eza -lg --icons"
 alias la="eza -lag --icons"
 
+#enable fzf
+if [[ -x $(command -v fzf) ]]; then
+    eval "$(fzf --zsh)"
+fi
+
 # Load local machine-specific configurations if the file exists
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
