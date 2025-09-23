@@ -19,6 +19,7 @@ vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "ddkP", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "ddp", { noremap = true, silent = true })
 -- newline
+vim.keymap.set("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
 vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
 
 vim.g.mapleader = " "

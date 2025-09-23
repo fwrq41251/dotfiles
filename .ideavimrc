@@ -82,6 +82,7 @@ nmap <leader>t <Action>(de.netnexus.CamelCasePlugin.ToggleCamelCase)<Esc>
 nmap <leader>g <Action>(Generate)
 nmap <leader>n <Action>(NewClass)
 nmap <leader>o <Action>(CloseAllEditorsButActive)
+nmap <leader>y <Action>(CopyReference)
 nmap <leader>uz <Action>(ToggleDistractionFreeMode)
 nmap <leader><leader> <Action>(GotoFile)
 nmap <leader>s <Action>(FileStructurePopup)
