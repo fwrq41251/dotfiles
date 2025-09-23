@@ -5,6 +5,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.color_scheme = "Tokyo Night Storm"
+-- config.window_background_opacity = 0.95
 
 -- This is where you actually apply your config choices.
 -- config.font = wezterm.font("JetBrainsMono Nerd Font")
