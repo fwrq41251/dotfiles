@@ -4,33 +4,13 @@
 
 --select word
 vim.keymap.set("n", "vv", "viw", { noremap = true, silent = true })
--- navigation
-vim.keymap.set("n", ">", "<C-d>zz", { noremap = true, silent = true })
-vim.keymap.set("n", "<", "<C-u>zz", { noremap = true, silent = true })
 -- paste after the current line
 vim.keymap.set("n", "<C-p>", "$p", { noremap = true, silent = true })
 -- copy until the end of the line
 vim.keymap.set("n", "Y", "y$", { noremap = true, silent = true })
 -- paster and copy to clipboard
 vim.keymap.set("x", "p", "pgvy", { noremap = true, silent = true })
--- move lines
-vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv", { noremap = true, silent = true })
-vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-k>", "ddkP", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-j>", "ddp", { noremap = true, silent = true })
 -- newline
 vim.keymap.set("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
 vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
-
-vim.g.mapleader = " "
-
--- Compile C/C++ files
-vim.keymap.set(
-  "n", -- Mode: Normal
-  "<F5>",
-  function()
-    vim.cmd("write")
-    vim.cmd("!gcc -g % -o %<")
-  end,
-  { noremap = true, silent = true, desc = "Compile C/C++ File" }
-)
+vim.keymap.set("i", "<C-CR>", "<Esc>O", { noremap = true, silent = true })

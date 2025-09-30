@@ -54,10 +54,10 @@ nnoremap Y y$
 " paster and copy to clipboard
 xnoremap p pgvy
 " move lines
-vnoremap <C-k> :m '<-2<CR>gv
-vnoremap <C-j> :m '>+1<CR>gv
-nnoremap <C-k> ddkP
-nnoremap <C-j> ddp
+vnoremap <M-k> :m '<-2<CR>gv
+vnoremap <M-j> :m '>+1<CR>gv
+nnoremap <M-k> ddkP
+nnoremap <M-j> ddp
 " select to the end of the line
 nnoremap <C-v> v$
 
