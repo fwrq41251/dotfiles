@@ -41,19 +41,26 @@ local function isMenuBarHidden()
 	return false
 end
 
--- 获取应用窗口（即使不在最前面）
+-- 获取应用窗口
 local function getAppWindow(appName)
 	local app = hs.application.get(appName)
 	if app then
 		-- 获取应用的主窗口，即使它不在最前面
 		local windows = app:allWindows()
 		if windows and #windows > 0 then
-			-- 返回第一个标准窗口
+			local mainWindow = nil
+			local maxArea = 0
 			for _, win in ipairs(windows) do
-				if win:isStandard() and win:isVisible() then
-					return win
+				if win:isVisible() then
+					local frame = win:frame()
+					local area = frame.w * frame.h
+					if area > maxArea then
+						maxArea = area
+						mainWindow = win
+					end
 				end
 			end
+			return mainWindow
 		end
 	end
 	return nil

@@ -14,3 +14,7 @@ vim.keymap.set("x", "p", "pgvy", { noremap = true, silent = true })
 vim.keymap.set("n", "<CR>", "o<Esc>", { noremap = true, silent = true })
 vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-CR>", "<Esc>O", { noremap = true, silent = true })
+-- show function signature
+vim.keymap.set("i", "<C-k>", function()
+  vim.lsp.buf.signature_help()
+end, { noremap = true, silent = true })
