@@ -2,7 +2,6 @@
 local timeCanvas = nil
 local timeTimer = nil
 local menuBarWatcher = nil
-local windowFilters = {}
 
 -- 不同应用的时钟位置配置
 local CLOCK_CONFIGS = {
@@ -13,35 +12,57 @@ local CLOCK_CONFIGS = {
 		height = 22,
 	},
 	["IntelliJ IDEA"] = {
-		offsetFromRight = 90,
+		offsetFromRight = 100,
 		offsetFromTop = 11,
 		width = 60,
 		height = 22,
 	},
-	-- ["Google Chrome"] = {
-	--     offsetFromRight = 100,
-	--     offsetFromTop = 10,
-	--     width = 60,
-	--     height = 22
-	-- }
 }
 
--- 检查 menu bar 是否隐藏
+-- 检查 menu bar 是否隐藏（更可靠的方法）
 local function isMenuBarHidden()
+	-- 检查系统偏好设置中 menu bar 是否设置为自动隐藏
+	local autohide = hs.execute("defaults read NSGlobalDomain _HIHideMenuBar 2>/dev/null")
+	if autohide and autohide:match("1") then
+		return true
+	end
+
+	-- 检查屏幕可用区域
 	local screen = hs.screen.mainScreen()
 	local fullFrame = screen:fullFrame()
 	local frame = screen:frame()
-	return fullFrame.h == frame.h
+
+	-- 如果可用区域的 y 坐标等于完整区域的 y 坐标，说明 menu bar 被隐藏
+	-- 并且可用区域的高度等于完整区域的高度
+	if frame.y == fullFrame.y and frame.h == fullFrame.h then
+		return true
+	end
+
+	return false
 end
 
--- 获取当前应用窗口
-local function getCurrentAppWindow(appName)
+-- 获取应用窗口（即使不在最前面）
+local function getAppWindow(appName)
 	local app = hs.application.get(appName)
 	if app then
-		local window = app:focusedWindow()
-		return window
+		-- 获取应用的主窗口，即使它不在最前面
+		local windows = app:allWindows()
+		if windows and #windows > 0 then
+			-- 返回第一个标准窗口
+			for _, win in ipairs(windows) do
+				if win:isStandard() and win:isVisible() then
+					return win
+				end
+			end
+		end
 	end
 	return nil
+end
+
+-- 检查某个应用的窗口是否可见
+local function isAppWindowVisible(appName)
+	local window = getAppWindow(appName)
+	return window ~= nil and window:isVisible()
 end
 
 -- 计算时钟位置
@@ -60,7 +81,7 @@ local function createTimeDisplay(appName)
 		timeCanvas:delete()
 	end
 
-	local window = getCurrentAppWindow(appName)
+	local window = getAppWindow(appName)
 	if not window then
 		return
 	end
@@ -103,7 +124,7 @@ end
 
 -- 更新时钟位置（跟随窗口）
 local function updatePosition(appName)
-	local window = getCurrentAppWindow(appName)
+	local window = getAppWindow(appName)
 	if not window or not timeCanvas then
 		return
 	end
@@ -124,20 +145,35 @@ local currentClockApp = nil
 -- 检查并更新显示状态
 local function checkAndUpdateDisplay()
 	local currentApp = hs.application.frontmostApplication()
-	local appName = currentApp:name()
+	local currentAppName = currentApp:name()
 
-	-- 只在配置表中存在的应用并且 menu bar 隐藏时显示
-	if CLOCK_CONFIGS[appName] and isMenuBarHidden() then
+	-- 检查当前应用或任何已配置的应用窗口是否可见
+	local targetApp = nil
+
+	-- 优先显示当前应用的时钟（如果配置了）
+	if CLOCK_CONFIGS[currentAppName] and isMenuBarHidden() then
+		targetApp = currentAppName
+	else
+		-- 如果当前应用没有配置，检查其他配置的应用是否可见
+		for appName, _ in pairs(CLOCK_CONFIGS) do
+			if isAppWindowVisible(appName) and isMenuBarHidden() then
+				targetApp = appName
+				break
+			end
+		end
+	end
+
+	if targetApp then
 		-- 如果切换了应用，重新创建时钟
-		if currentClockApp ~= appName then
-			currentClockApp = appName
+		if currentClockApp ~= targetApp then
+			currentClockApp = targetApp
 			if timeCanvas then
 				timeCanvas:delete()
 				timeCanvas = nil
 			end
-			createTimeDisplay(appName)
+			createTimeDisplay(targetApp)
 		elseif not timeCanvas then
-			createTimeDisplay(appName)
+			createTimeDisplay(targetApp)
 		end
 
 		if not timeTimer then
@@ -163,22 +199,8 @@ end
 
 -- 监听窗口移动和调整大小
 local function setupWatcher()
-	-- 监听应用切换和窗口变化
-	menuBarWatcher = hs.timer.doEvery(0.5, checkAndUpdateDisplay)
-
-	-- 为每个配置的应用创建窗口过滤器
-	for appName, _ in pairs(CLOCK_CONFIGS) do
-		local filter = hs.window.filter.new(false)
-		filter:setAppFilter(appName)
-
-		filter:subscribe({ hs.window.filter.windowMoved, hs.window.filter.windowResized }, function()
-			if currentClockApp == appName then
-				updatePosition(appName)
-			end
-		end)
-
-		table.insert(windowFilters, filter)
-	end
+	-- 使用定时器来处理所有变化（简单且可靠）
+	menuBarWatcher = hs.timer.doEvery(0.2, checkAndUpdateDisplay)
 
 	-- 初始检查
 	checkAndUpdateDisplay()
@@ -204,9 +226,6 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
 	end
 	if menuBarWatcher then
 		menuBarWatcher:stop()
-	end
-	for _, filter in ipairs(windowFilters) do
-		filter:unsubscribeAll()
 	end
 	hs.reload()
 end)
