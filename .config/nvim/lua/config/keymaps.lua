@@ -18,3 +18,8 @@ vim.keymap.set("i", "<C-CR>", "<Esc>O", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-k>", function()
   vim.lsp.buf.signature_help()
 end, { noremap = true, silent = true })
+-- debug
+vim.api.nvim_set_keymap("n", "<F5>", ':lua require("dap").continue()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F8>", ':lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F7>", ':lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-F8>", ':lua require("dap").step_out()<CR>', { noremap = true, silent = true })
