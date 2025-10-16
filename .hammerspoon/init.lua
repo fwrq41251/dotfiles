@@ -2,6 +2,7 @@
 local timeCanvas = nil
 local timeTimer = nil
 local menuBarWatcher = nil
+local MIN_WINDOW_AREA = 500000
 
 -- 不同应用的时钟位置配置
 local CLOCK_CONFIGS = {
@@ -54,7 +55,7 @@ local function getAppWindow(appName)
 				if win:isVisible() then
 					local frame = win:frame()
 					local area = frame.w * frame.h
-					if area > maxArea then
+					if area > maxArea and area > MIN_WINDOW_AREA then
 						maxArea = area
 						mainWindow = win
 					end

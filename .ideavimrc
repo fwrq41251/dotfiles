@@ -39,6 +39,7 @@ set clipboard+=unnamed
 set surround
 set which-key
 set notimeout
+set functiontextobj
 
 "select word
 nnoremap vv viw
