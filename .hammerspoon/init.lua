@@ -6,7 +6,7 @@ local MIN_WINDOW_AREA = 500000
 
 -- 不同应用的时钟位置配置
 local CLOCK_CONFIGS = {
-	["Zen"] = { -- 记得替换为实际的应用名
+	["Zen"] = {
 		offsetFromRight = 110,
 		offsetFromTop = 11,
 		width = 60,
@@ -17,6 +17,13 @@ local CLOCK_CONFIGS = {
 		offsetFromTop = 11,
 		width = 60,
 		height = 22,
+	},
+	["Google Chrome"] = {
+		offsetFromRight = 110,
+		offsetFromTop = 11,
+		width = 60,
+		height = 22,
+		textColor = { white = 0.0, alpha = 0.85 },
 	},
 }
 
@@ -115,7 +122,7 @@ local function createTimeDisplay(appName)
 		text = os.date("%H:%M"),
 		textFont = ".AppleSystemUIFont",
 		textSize = 13,
-		textColor = { white = 1.0, alpha = 0.85 },
+		textColor = config.textColor or { white = 1.0, alpha = 0.85 },
 		textAlignment = "right",
 		frame = { x = 0, y = 0, w = config.width, h = config.height },
 	}
@@ -152,21 +159,17 @@ local currentClockApp = nil
 
 -- 检查并更新显示状态
 local function checkAndUpdateDisplay()
-	local currentApp = hs.application.frontmostApplication()
-	local currentAppName = currentApp:name()
-
-	-- 检查当前应用或任何已配置的应用窗口是否可见
 	local targetApp = nil
+	local orderedWindows = hs.window.orderedWindows()
 
-	-- 优先显示当前应用的时钟（如果配置了）
-	if CLOCK_CONFIGS[currentAppName] and isMenuBarHidden() then
-		targetApp = currentAppName
-	else
-		-- 如果当前应用没有配置，检查其他配置的应用是否可见
-		for appName, _ in pairs(CLOCK_CONFIGS) do
-			if isAppWindowVisible(appName) and isMenuBarHidden() then
+	for _, win in ipairs(orderedWindows) do
+		local app = win:application()
+		if app then
+			local appName = app:name()
+			-- 检查是否是配置的应用，且窗口可见，且 menu bar 隐藏
+			if CLOCK_CONFIGS[appName] and isAppWindowVisible(appName) and not menuBarVisible then
 				targetApp = appName
-				break
+				break -- 找到第一个（最前面的）就停止
 			end
 		end
 	end
