@@ -37,5 +37,10 @@
   },
   "status_bar": {
     "experimental.show": false
+  },
+  "format_on_save": "on",
+  "code_actions_on_format": {
+    "source.organizeImports": true,
+    "source.fixAll": true
   }
 }
