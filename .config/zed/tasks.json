@@ -1,0 +1,9 @@
+[
+  {
+    "label": "lazygit",
+    "command": "ghostty --title=\"FLOAT_LAZYGIT\" -e lazygit",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": true,
+    "reveal": "never"
+  }
+]
