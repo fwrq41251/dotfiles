@@ -8,9 +8,7 @@
 [
   {
     "context": "Workspace",
-    "bindings": {
-      "space e": "workspace::ToggleLeftDock"
-    }
+    "bindings": {}
   },
   {
     "context": "Editor && vim_mode == insert",
@@ -27,7 +25,25 @@
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "space b o": "pane::CloseOtherItems",
-      "space b d": "pane::CloseActiveItem"
+      "space b d": "pane::CloseActiveItem",
+      "enter": ["workspace::SendKeystrokes", "o escape"],
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "space s s": "outline::Toggle",
+      "g t": "editor::GoToTypeDefinition",
+      "g r": "editor::FindAllReferences",
+      "space r": "editor::Rename",
+      "=": "editor::Format",
+      "f2": "editor::GoToDiagnostic",
+      "space /": "workspace::NewSearch"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "/": "workspace::NewSearch"
     }
   },
   {
