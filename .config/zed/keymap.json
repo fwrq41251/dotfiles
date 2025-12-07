@@ -27,7 +27,12 @@
     "bindings": {
       "space space": "file_finder::Toggle",
       "space e": "workspace::ToggleLeftDock",
-      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space g": [
+        "task::Spawn",
+        {
+          "task_name": "lazygit"
+        }
+      ],
       "space b o": "pane::CloseOtherItems",
       "space b d": "pane::CloseActiveItem",
       "space s s": "outline::Toggle",
@@ -63,7 +68,12 @@
     "context": "EmptyPane || ProjectPanel",
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space g": [
+        "task::Spawn",
+        {
+          "task_name": "lazygit"
+        }
+      ],
       "space e": "workspace::ToggleLeftDock",
     },
   },
