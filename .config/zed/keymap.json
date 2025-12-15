@@ -11,6 +11,12 @@
     "bindings": {}
   },
   {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-.": "editor::ToggleCodeActions"
+    }
+  },
+  {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
@@ -36,7 +42,8 @@
       "space r": "editor::Rename",
       "=": "editor::Format",
       "f2": "editor::GoToDiagnostic",
-      "space /": "workspace::NewSearch"
+      "space /": "workspace::NewSearch",
+      "ctrl-s": "workspace::SaveAll"
     }
   },
   {
@@ -50,6 +57,14 @@
   {
     "bindings": {
       "ctrl-/": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "EmptyPane || ProjectPanel",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space e": "workspace::ToggleLeftDock"
     }
   }
 ]
