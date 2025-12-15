@@ -22,13 +22,13 @@ config.font_size = 14
 config.window_decorations = "RESIZE"
 
 -- key binding
-config.keys = {
-	-- Turn off the default CMD-m Hide action, allowing CMD-m to
+config.keys = {-- Turn off the default CMD-m Hide action, allowing CMD-m to
 	-- be potentially recognized and handled by the tab
 	{
 		key = "[",
 		mods = "CMD",
-		action = wezterm.action({ ActivateTabRelative = -1 }),
+		action = wezterm.action({ ActivateTabRelative = -1,
+  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},}),
 	},
 	{
 		key = "]",

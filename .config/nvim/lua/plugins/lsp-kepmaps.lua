@@ -6,6 +6,7 @@ return {
       -- ['*'] 是一个通配符，意味着这里的配置将应用于 *所有* LSP 服务器
       ["*"] = {
         keys = {
+          { "K", false },
           { "K", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "Go to Definition" },
         },
       },

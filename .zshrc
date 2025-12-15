@@ -118,15 +118,6 @@ alias ls="eza --icons"
 alias ll="eza -lg --icons"
 alias la="eza -lag --icons"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH=$HOME/git/flutter/flutter/bin:$PATH
-
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config"
-
 # plugins
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -141,4 +132,16 @@ if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH=$HOME/git/flutter/flutter/bin:$PATH
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
 export PATH=$PATH:/Users/user/.spicetify
+# amp
+export PATH="$HOME/.local/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH="$PATH:$HOME/go/bin"
+

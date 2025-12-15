@@ -23,7 +23,7 @@ local CLOCK_CONFIGS = {
 		offsetFromTop = 11,
 		width = 60,
 		height = 22,
-		textColor = { white = 0.0, alpha = 0.85 },
+		textColor = { white = 1.0, alpha = 0.85 },
 	},
 }
 
