@@ -23,7 +23,7 @@
     },
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "Editor && vim_mode == normal && !showing_code_actions && !showing_completions",
     "bindings": {
       "space space": "file_finder::Toggle",
       "space e": "workspace::ToggleLeftDock",
@@ -58,6 +58,14 @@
       "alt-k": "editor::MoveLineUp",
       "/": "workspace::NewSearch",
     },
+  },
+  {
+    "context": "EmptyPane || ProjectPanel",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space e": "workspace::ToggleLeftDock"
+    }
   },
   {
     "bindings": {
