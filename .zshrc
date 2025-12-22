@@ -144,4 +144,6 @@ export PATH=$PATH:/Users/user/.spicetify
 export PATH="$HOME/.local/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 export PATH="$PATH:$HOME/go/bin"
+export EDITOR=nvim
+
 

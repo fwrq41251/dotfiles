@@ -8,19 +8,19 @@
 [
   {
     "context": "Workspace",
-    "bindings": {}
+    "bindings": {},
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-.": "editor::ToggleCodeActions"
-    }
+      "ctrl-.": "editor::ToggleCodeActions",
+    },
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-    }
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
@@ -33,38 +33,44 @@
       "space s s": "outline::Toggle",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
-      "shift-k": "editor::GoToDeclaration",
-      "enter": ["workspace::SendKeystrokes", "o escape"],
+      "shift-k": "editor::GoToDefinition",
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       "g t": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
-      "space r": "editor::Rename",
+      "space c r": "editor::Rename",
+      "space r r": "editor::SpawnNearestTask",
       "=": "editor::Format",
       "f2": "editor::GoToDiagnostic",
       "space /": "workspace::NewSearch",
-      "ctrl-s": "workspace::SaveAll"
-    }
+      "ctrl-s": "workspace::SaveAll",
+    },
   },
   {
     "context": "Editor && vim_mode == visual",
     "bindings": {
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
-      "/": "workspace::NewSearch"
-    }
+      "/": "workspace::NewSearch",
+    },
   },
   {
     "bindings": {
-      "ctrl-/": "terminal_panel::Toggle"
-    }
+      "ctrl-/": "terminal_panel::Toggle",
+    },
   },
   {
     "context": "EmptyPane || ProjectPanel",
     "bindings": {
       "space space": "file_finder::Toggle",
       "space g": ["task::Spawn", { "task_name": "lazygit" }],
-      "space e": "workspace::ToggleLeftDock"
-    }
-  }
+      "space e": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "Editor && edit_prediction_conflict",
+    "bindings": {
+      "alt-l": "editor::AcceptEditPrediction",
+    },
+  },
 ]
