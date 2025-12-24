@@ -114,6 +114,7 @@ alias vim='nvim'
 alias vi='nvim'
 alias brewup='brew update && brew upgrade'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias lconfig='lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias ls="eza --icons"
 alias ll="eza -lg --icons"
 alias la="eza -lag --icons"
