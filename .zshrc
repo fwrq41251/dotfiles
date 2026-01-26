@@ -148,3 +148,6 @@ export PATH="$PATH:$HOME/go/bin"
 export EDITOR=nvim
 
 
+
+# Added by Antigravity
+export PATH="/Users/user/.antigravity/antigravity/bin:$PATH"

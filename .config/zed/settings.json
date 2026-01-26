@@ -10,21 +10,21 @@
   "agent": {
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5-mini"
+      "model": "gpt-5-mini",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "dark": "Zed (Default)",
   },
   "base_keymap": "JetBrains",
   "vim_mode": true,
@@ -33,21 +33,21 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Tokyo Night Storm"
+    "dark": "Tokyo Night Storm",
   },
   "status_bar": {
-    // "experimental.show": false
+    "experimental.show": false,
   },
   "format_on_save": "on",
   "code_actions_on_format": {
     "source.organizeImports": true,
-    "source.fixAll": true
+    "source.fixAll": true,
   },
   "lsp": {
     "jdtls": {
       "settings": {
-        "java_home": "/home/winry/.local/share/mise/installs/java/21.0.2"
-      }
-    }
-  }
+        "java_home": "/home/winry/.local/share/mise/installs/java/21.0.2",
+      },
+    },
+  },
 }
