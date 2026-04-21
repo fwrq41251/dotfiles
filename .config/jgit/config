@@ -55,3 +55,9 @@
 [filesystem "Homebrew|21.0.10|/dev/disk3s5"]
 	timestampResolution = 2000 nanoseconds
 	minRacyThreshold = 0 nanoseconds
+[filesystem "JetBrains s.r.o.|21.0.10|/dev/disk3s5"]
+	timestampResolution = 4000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[filesystem "JetBrains s.r.o.|25.0.2|/dev/disk3s5"]
+	timestampResolution = 3000 nanoseconds
+	minRacyThreshold = 0 nanoseconds

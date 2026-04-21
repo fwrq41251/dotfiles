@@ -7,15 +7,18 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git_panel": {
+    "tree_view": true,
+  },
+  "edit_predictions": {
+    "provider": "copilot",
+  },
   "agent": {
     "inline_assistant_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini",
     },
     "model_parameters": [],
-  },
-  "features": {
-    "edit_prediction_provider": "copilot",
   },
   "telemetry": {
     "diagnostics": false,
@@ -36,18 +39,11 @@
     "dark": "Tokyo Night Storm",
   },
   "status_bar": {
-    "experimental.show": false,
+    // "experimental.show": false,
   },
   "format_on_save": "on",
   "code_actions_on_format": {
-    "source.organizeImports": true,
+    // "source.organizeImports": true,
     "source.fixAll": true,
-  },
-  "lsp": {
-    "jdtls": {
-      "settings": {
-        "java_home": "/home/winry/.local/share/mise/installs/java/21.0.2",
-      },
-    },
   },
 }
