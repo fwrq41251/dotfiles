@@ -1,0 +1,14 @@
+# Installed extensions, dependencies, and generated bundles.
+/.config/raycast/extensions/
+
+# Machine-generated filesystem records and playback state.
+/.config/jgit/config
+/.config/ncspot/userstate.cbor
+
+# Editor conversations, prompt databases, and local backups.
+/.config/zed/conversations/
+/.config/zed/prompts/
+/.config/zed/*_backup.json
+
+# Machine-local shell configuration.
+/.zshrc.local

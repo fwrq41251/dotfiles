@@ -159,3 +159,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # coursier
 export PATH="$PATH:/Users/user/Library/Application Support/Coursier/bin"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/user/.local/bin:$PATH"
+
+bindkey -v
+
+export AI_ASSETS_ROOT="/Users/user/AI"
+
+# Select development tool versions from each project's mise.toml.
+eval "$(mise activate zsh)"

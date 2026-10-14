@@ -51,6 +51,10 @@
       "space c a": "editor::ToggleCodeActions",
       //run
       "space r r": "editor::SpawnNearestTask",
+      "space d d": "debugger::Start",
+      "space d r": "debugger::Rerun",
+      "space d b": "editor::ToggleBreakpoint",
+      "space d shift-r": "debugger::RerunSession",
       //navigation
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
