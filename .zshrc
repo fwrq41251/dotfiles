@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+[[ -r "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -119,54 +119,43 @@ alias ls="eza --icons"
 alias ll="eza -lg --icons"
 alias la="eza -lag --icons"
 
-# plugins
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Homebrew plugins (Apple Silicon and Intel).
+if (( $+commands[brew] )); then
+    dotfiles_brew_prefix="$(brew --prefix)"
+    for dotfiles_plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+        dotfiles_plugin_file="$dotfiles_brew_prefix/share/$dotfiles_plugin/$dotfiles_plugin.zsh"
+        [[ ! -r "$dotfiles_plugin_file" ]] || source "$dotfiles_plugin_file"
+    done
+    unset dotfiles_plugin dotfiles_plugin_file
+fi
 
 #enable fzf
 if [[ -x $(command -v fzf) ]]; then
     eval "$(fzf --zsh)"
 fi
 
-# Load local machine-specific configurations if the file exists
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH=$HOME/git/flutter/flutter/bin:$PATH
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config"
-export PATH=$PATH:/Users/user/.spicetify
-# amp
-export PATH="$HOME/.local/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
-export PATH="$PATH:$HOME/go/bin"
+# Shared command paths; machine-specific SDK paths belong in .zshrc.local.
+export PATH="$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
 export EDITOR=nvim
-
-# Added by Antigravity
-export PATH="/Users/user/.antigravity/antigravity/bin:$PATH"
-
-# bun completions
-[ -s "/Users/user/.bun/_bun" ] && source "/Users/user/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# coursier
-export PATH="$PATH:/Users/user/Library/Application Support/Coursier/bin"
-
-
-# Added by Antigravity CLI installer
-export PATH="/Users/user/.local/bin:$PATH"
+if [[ -n ${dotfiles_brew_prefix:-} ]]; then
+    export PATH="$dotfiles_brew_prefix/opt/openjdk@21/bin:$PATH"
+    export CPPFLAGS="-I$dotfiles_brew_prefix/opt/openjdk@21/include"
+    unset dotfiles_brew_prefix
+fi
+if [[ -x /usr/libexec/java_home ]]; then
+    dotfiles_java_home="$(/usr/libexec/java_home -v 21 2>/dev/null)"
+    [[ -z "$dotfiles_java_home" ]] || export JAVA_HOME="$dotfiles_java_home"
+    unset dotfiles_java_home
+fi
 
 bindkey -v
 
-export AI_ASSETS_ROOT="/Users/user/AI"
-
 # Select development tool versions from each project's mise.toml.
-eval "$(mise activate zsh)"
+if (( $+commands[mise] )); then
+    eval "$(mise activate zsh)"
+fi
+
+# Load machine-specific overrides last.
+[[ ! -r "$HOME/.zshrc.local" ]] || source "$HOME/.zshrc.local"

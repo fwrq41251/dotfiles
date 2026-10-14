@@ -1,0 +1,6 @@
+# Copy to ~/.zshrc.local and enable paths for installed tools as needed.
+# export AI_ASSETS_ROOT="$HOME/AI"
+# export PATH="$HOME/path/to/flutter/bin:$PATH"
+# export BUN_INSTALL="$HOME/.bun"
+# export PATH="$BUN_INSTALL/bin:$PATH"
+# [[ ! -r "$BUN_INSTALL/_bun" ]] || source "$BUN_INSTALL/_bun"

@@ -12,3 +12,25 @@
 
 # Machine-local shell configuration.
 /.zshrc.local
+
+# Private machine-specific overrides.
+/.gitconfig.local
+/.zprofile.local
+
+# Dependencies restored by .config/dotfiles/bootstrap.sh.
+/.config/emacs/
+/.config/tmux/plugins/
+/.tmux/plugins/
+/.oh-my-zsh/
+
+# Unused templates and experiments (keep existing local copies).
+/.config/nvim/myscript.lua
+/.config/nvim/lua/plugins/example.lua
+/.config/nvim/lua/plugins/neotest-java.lua
+/.config/ncspot/config.toml
+
+# Local backups and logs.
+/.config/zellij/*.bak
+/.config/btop/*.log
+/.config/lazygit/temp_*.tar.gz
+/.zshenv.local
