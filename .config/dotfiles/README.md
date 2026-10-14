@@ -40,18 +40,40 @@ git config --file "$HOME/.gitconfig.local" user.email 'you@example.com'
 
 ## 日常维护
 
+仓库使用白名单：默认忽略整个主目录，只开放 `.gitignore` 中列出的配置。Neovim 的 `lua/**/*.lua`、Doom 顶层 `*.el` 和 Hammerspoon 顶层 `*.lua` 等新增配置会自动成为候选文件；无需逐个修改忽略规则。`*.local.*`、缓存、备份、安装目录和未开放的应用目录继续忽略。
+
+Git 会显示白名单范围内的所有未跟踪文件。允许被发现不代表自动提交，仍需暂存并检查内容：
+
 ```sh
-config status --untracked-files=no
-config add -- .zshrc .config/zed/settings.json
+config status
+config add -- .zshrc .config/nvim/lua
 config diff --cached
 config commit -m 'Update configuration'
 config push origin main
 ```
 
-只按具体路径添加文件。工作目录是整个主目录，避免 `config add .` 或 `config add -A`，以免纳入私人文件。Git 默认隐藏未跟踪文件；检查遗漏时指定目录：
+也可以用 `config add -A` 批量暂存白名单内的新增文件及所有已跟踪文件的改动和删除，提交前检查 `config diff --cached`。白名单按路径筛选，不能判断配置内容是否含凭证；不要使用 `config add -f` 绕过规则。
 
-```sh
-config status --untracked-files=all -- .config/doom .config/zed
+新增一种应用时，先在根 `.gitignore` 开放目录，再明确开放配置文件。例如纳入一个应用的 `config.toml`：
+
+```gitignore
+!/.config/my-app/
+/.config/my-app/*
+!/.config/my-app/config.toml
 ```
 
-缓存、聊天记录、凭证、本地身份、插件安装目录和备份不应提交。Neovim 插件锁文件应保留。停止跟踪文件不会从旧提交中移除它们；当前仓库保留原有历史。
+将以上规则放在 `.config` 白名单区域、最终的本地文件排除规则之前。仅开放必需文件，避免开放整个应用目录。
+
+检查某个文件为何被忽略：
+
+```sh
+config check-ignore -v -- .config/my-app/config.toml
+```
+
+查看包括隐藏目录中的未跟踪文件时，要显式指定目录：
+
+```sh
+config status --ignored --untracked-files=all -- .config/my-app
+```
+
+Neovim 插件锁文件应保留。忽略规则不会自动停止跟踪已纳入仓库的文件，也不会清理历史。

@@ -1,36 +1,74 @@
-# Installed extensions, dependencies, and generated bundles.
-/.config/raycast/extensions/
+# Ignore the home directory by default; only expose managed configuration.
+/*
+!/.gitignore
+!/.gitconfig
+!/.ideavimrc
+!/.p10k.zsh
+!/.tmux.conf
+!/.wezterm.lua
+!/.zprofile
+!/.zshenv
+!/.zshrc
 
-# Machine-generated filesystem records and playback state.
-/.config/jgit/config
-/.config/ncspot/userstate.cbor
+# Only the listed applications are managed under .config.
+!/.config/
+/.config/*
 
-# Editor conversations, prompt databases, and local backups.
-/.config/zed/conversations/
-/.config/zed/prompts/
-/.config/zed/*_backup.json
+!/.config/btop/
+/.config/btop/*
+!/.config/btop/btop.conf
 
-# Machine-local shell configuration.
-/.zshrc.local
+# Doom configuration files, including new top-level Elisp modules.
+!/.config/doom/
+/.config/doom/*
+!/.config/doom/*.el
 
-# Private machine-specific overrides.
-/.gitconfig.local
-/.zprofile.local
+# Repository documentation, dependency manifest, scripts, and examples.
+!/.config/dotfiles/
+/.config/dotfiles/*
+!/.config/dotfiles/Brewfile
+!/.config/dotfiles/*.md
+!/.config/dotfiles/*.sh
+!/.config/dotfiles/*.example
 
-# Dependencies restored by .config/dotfiles/bootstrap.sh.
-/.config/emacs/
-/.config/tmux/plugins/
-/.tmux/plugins/
-/.oh-my-zsh/
+!/.config/lazygit/
+/.config/lazygit/*
+!/.config/lazygit/config.yml
 
-# Unused templates and experiments (keep existing local copies).
-/.config/nvim/myscript.lua
+# Neovim: configuration and lockfiles, plus new Lua modules at any depth.
+!/.config/nvim/
+/.config/nvim/*
+!/.config/nvim/.gitignore
+!/.config/nvim/.neoconf.json
+!/.config/nvim/LICENSE
+!/.config/nvim/README.md
+!/.config/nvim/init.lua
+!/.config/nvim/lazy-lock.json
+!/.config/nvim/lazyvim.json
+!/.config/nvim/stylua.toml
+!/.config/nvim/lua/
+/.config/nvim/lua/**
+!/.config/nvim/lua/**/
+!/.config/nvim/lua/**/*.lua
+
+# Zed databases, conversations, and backups remain excluded.
+!/.config/zed/
+/.config/zed/*
+!/.config/zed/keymap.json
+!/.config/zed/settings.json
+!/.config/zed/tasks.json
+
+!/.config/zellij/
+/.config/zellij/*
+!/.config/zellij/config.kdl
+
+# Top-level Hammerspoon scripts; installed Spoons remain excluded.
+!/.hammerspoon/
+/.hammerspoon/*
+!/.hammerspoon/*.lua
+
+# Local overrides and unused templates stay excluded even in allowed folders.
+*.local.*
+!/.config/dotfiles/zshrc.local.example
 /.config/nvim/lua/plugins/example.lua
 /.config/nvim/lua/plugins/neotest-java.lua
-/.config/ncspot/config.toml
-
-# Local backups and logs.
-/.config/zellij/*.bak
-/.config/btop/*.log
-/.config/lazygit/temp_*.tar.gz
-/.zshenv.local

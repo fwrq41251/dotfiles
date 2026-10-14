@@ -52,7 +52,7 @@ if $conflict; then
     exit 1
 fi
 config_git checkout HEAD -- .
-config_git config status.showUntrackedFiles no
+config_git config status.showUntrackedFiles all
 config_git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
 
 if $install_dependencies; then
