@@ -38,6 +38,11 @@
     "context": "Editor && vim_mode == normal && !showing_code_actions && !showing_completions",
     "bindings": {
       "space e": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
       "ctrl-s": "workspace::SaveAll",
     },
   },
@@ -55,6 +60,7 @@
         },
       ],
       "space g d": "git::Diff",
+      "space g b": "git::Branch",
       //buffers
       "space b o": "pane::CloseOtherItems",
       "space b d": "pane::CloseActiveItem",
@@ -62,13 +68,16 @@
       //goto
       "g t": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
+      "g h": "call_hierarchy::ShowIncomingCalls",
       "shift-k": "editor::GoToDefinition",
       //code
       "space c r": "editor::Rename",
       "space c a": "editor::ToggleCodeActions",
       "space c f": "editor::Format",
+      "space c i": "editor::GoToImplementation",
       //run
       "space r r": "editor::SpawnNearestTask",
+      "space r l": "task::Rerun",
       "space d d": "debugger::Start",
       "space d r": "debugger::Rerun",
       "space d b": "editor::ToggleBreakpoint",
@@ -111,6 +120,7 @@
         { "task_name": "lazygit", "reveal_target": "center" },
       ],
       "space g d": "git::Diff",
+      "space g b": "git::Branch",
       "space e": "workspace::ToggleLeftDock",
     },
   },
