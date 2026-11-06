@@ -1,9 +1,11 @@
 [
   {
     "label": "lazygit",
-    "command": "ghostty --title=\"FLOAT_LAZYGIT\" -e lazygit",
+    "command": "lazygit",
     "use_new_terminal": false,
-    "allow_concurrent_runs": true,
-    "reveal": "never"
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "hide": "on_success"
   }
 ]

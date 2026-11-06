@@ -7,6 +7,12 @@
 // from the command palette.
 [
   {
+    "context": "(Workspace && left_dock == GitPanel) > (Editor || GitPanel || Pane)",
+    "bindings": {
+      "cmd-0": "workspace::ToggleLeftDock",
+    },
+  },
+  {
     "context": "Workspace",
     "bindings": {
       "ctrl-`": "workspace::ToggleAllDocks",
@@ -22,20 +28,30 @@
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-      "ctrl-s": ["vim::NormalBefore", "workspace::Save"],
+      "ctrl-s": [
+        "action::Sequence",
+        ["vim::NormalBefore", "workspace::SaveAll"],
+      ],
     },
   },
   {
     "context": "Editor && vim_mode == normal && !showing_code_actions && !showing_completions",
     "bindings": {
+      "space e": "workspace::ToggleLeftDock",
+      "ctrl-s": "workspace::SaveAll",
+    },
+  },
+  {
+    "context": "Editor && mode == full && vim_mode == normal && !showing_code_actions && !showing_completions",
+    "bindings": {
       //space
       "space space": "file_finder::Toggle",
-      "space e": "workspace::ToggleLeftDock",
       "space /": "workspace::NewSearch",
       "space g": [
         "task::Spawn",
         {
           "task_name": "lazygit",
+          "reveal_target": "center",
         },
       ],
       //buffers
@@ -49,6 +65,7 @@
       //code
       "space c r": "editor::Rename",
       "space c a": "editor::ToggleCodeActions",
+      "space c f": "editor::Format",
       //run
       "space r r": "editor::SpawnNearestTask",
       "space d d": "debugger::Start",
@@ -56,18 +73,18 @@
       "space d b": "editor::ToggleBreakpoint",
       "space d shift-r": "debugger::RerunSession",
       //navigation
+      "[ [": "editor::GoToPreviousHunk",
+      "] ]": "editor::GoToHunk",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       //others
-      "=": "editor::Format",
       "f2": "editor::GoToDiagnostic",
-      "ctrl-s": "workspace::SaveAll",
     },
   },
   {
-    "context": "Editor && vim_mode == visual",
+    "context": "Editor && mode == full && vim_mode == visual",
     "bindings": {
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
@@ -75,29 +92,16 @@
     },
   },
   {
-    "context": "EmptyPane || ProjectPanel",
+    "context": "EmptyPane || (ProjectPanel && not_editing)",
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space g": ["task::Spawn", { "task_name": "lazygit" }],
+      "space g": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
       "space e": "workspace::ToggleLeftDock",
     },
   },
   {
     "bindings": {
       "ctrl-/": "terminal_panel::Toggle",
-    },
-  },
-  {
-    "context": "EmptyPane || ProjectPanel",
-    "bindings": {
-      "space space": "file_finder::Toggle",
-      "space g": [
-        "task::Spawn",
-        {
-          "task_name": "lazygit",
-        },
-      ],
-      "space e": "workspace::ToggleLeftDock",
     },
   },
   {
