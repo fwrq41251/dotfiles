@@ -86,6 +86,7 @@
   {
     "context": "Editor && mode == full && vim_mode == visual",
     "bindings": {
+      "space c a": "editor::ToggleCodeActions",
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       "/": "workspace::NewSearch",

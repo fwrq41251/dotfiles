@@ -7,6 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cli_default_open_behavior": "existing_window",
+  "lsp": {
+    "metals": {
+      "settings": {
+        "startMcpServer": true
+      }
+    },
+    "intellij-server": {
+      "settings": {
+        "accept_jetbrains_eula": true,
+        "eula_hash": "cd82e6cdaf2790f1",
+        "server_path": "/Users/user/tools/intellij-lsp-zed/launcher/bin/intellij-server",
+        "intellij.dataSharing": "none",
+        "intellij.jdkForSymbolResolution": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+      }
+    }
+  },
+  "languages": {
+    "Java": {
+      "language_servers": ["intellij-server", "!jdtls"]
+    }
+  },
   "which_key": {
     "enabled": true
   },
