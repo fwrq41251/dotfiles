@@ -47,13 +47,14 @@
       //space
       "space space": "file_finder::Toggle",
       "space /": "workspace::NewSearch",
-      "space g": [
+      "space g g": [
         "task::Spawn",
         {
           "task_name": "lazygit",
           "reveal_target": "center",
         },
       ],
+      "space g d": "git::Diff",
       //buffers
       "space b o": "pane::CloseOtherItems",
       "space b d": "pane::CloseActiveItem",
@@ -93,10 +94,23 @@
     },
   },
   {
+    "context": "EmptyPane",
+    "bindings": {
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "space b d": "pane::CloseActiveItem",
+      "space b o": "pane::CloseOtherItems",
+    },
+  },
+  {
     "context": "EmptyPane || (ProjectPanel && not_editing)",
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space g": ["task::Spawn", { "task_name": "lazygit", "reveal_target": "center" }],
+      "space g g": [
+        "task::Spawn",
+        { "task_name": "lazygit", "reveal_target": "center" },
+      ],
+      "space g d": "git::Diff",
       "space e": "workspace::ToggleLeftDock",
     },
   },
