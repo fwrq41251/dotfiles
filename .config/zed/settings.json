@@ -10,8 +10,15 @@
   "cli_default_open_behavior": "existing_window",
   "lsp": {
     "metals": {
+      "binary": {
+        "path": "/Users/user/tools/metals-v2/start-metals-local-java-aosp"
+      },
+      "initialization_options": {
+        "isHttpEnabled": true
+      },
       "settings": {
-        "startMcpServer": true
+        "startMcpServer": true,
+        "googleJavaFormatStyle": "aosp"
       }
     },
     "intellij-server": {
@@ -26,7 +33,13 @@
   },
   "languages": {
     "Java": {
-      "language_servers": ["intellij-server", "!jdtls"]
+      "language_servers": ["metals", "!intellij-server", "!jdtls"],
+      "formatter": {
+        "language_server": {
+          "name": "metals"
+        }
+      },
+      "format_on_save": "modifications"
     }
   },
   "which_key": {
@@ -36,9 +49,11 @@
     "dock": "left",
   },
   "outline_panel": {
+    "button": false,
     "dock": "left",
   },
   "collaboration_panel": {
+    "button": false,
     "dock": "left",
   },
   "git_panel": {
@@ -49,6 +64,7 @@
     "provider": "copilot",
   },
   "agent": {
+    "button": false,
     "dock": "right",
     "inline_assistant_model": {
       "provider": "copilot_chat",
@@ -74,8 +90,22 @@
     "light": "One Light",
     "dark": "Tokyo Night Storm",
   },
+  "git": {
+    "inline_blame": { "enabled": false },
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false,
+    "agent_review": false,
+  },
+  "title_bar": {
+    "show_branch_name": false,
+    "show_branch_status_icon": false,
+    "show_worktree_name": false,
+  },
   "status_bar": {
-    // "experimental.show": false,
+    "experimental.show": false,
   },
   "format_on_save": "on",
   "code_actions_on_format": {
