@@ -15,7 +15,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Use Powerlevel10k when it is installed; fall back to a builtin theme otherwise.
+if [[ -d "$ZSH/custom/themes/powerlevel10k" ]]; then
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+else
+    ZSH_THEME="robbyrussell"
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -129,13 +134,24 @@ if (( $+commands[brew] )); then
     unset dotfiles_plugin dotfiles_plugin_file
 fi
 
+# Distribution packages (Arch, Ubuntu) install the plugins under /usr/share/zsh.
+if [[ -d /usr/share/zsh/plugins ]]; then
+    for dotfiles_plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+        dotfiles_plugin_file="/usr/share/zsh/plugins/$dotfiles_plugin/$dotfiles_plugin.zsh"
+        [[ ! -r "$dotfiles_plugin_file" ]] || source "$dotfiles_plugin_file"
+    done
+    unset dotfiles_plugin dotfiles_plugin_file
+fi
+
 #enable fzf
 if [[ -x $(command -v fzf) ]]; then
     eval "$(fzf --zsh)"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ "$ZSH_THEME" == powerlevel10k/* && -f "$HOME/.p10k.zsh" ]]; then
+    source "$HOME/.p10k.zsh"
+fi
 # Shared command paths; machine-specific SDK paths belong in .zshrc.local.
 export PATH="$HOME/.config/emacs/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
 export EDITOR=nvim
