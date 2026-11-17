@@ -7,43 +7,37 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "expand_excerpt_lines": 20,
+  "excerpt_context_lines": 10,
+  "cursor_animation": {
+    "enabled": true,
+  },
   "cli_default_open_behavior": "existing_window",
   "lsp": {
     "metals": {
-      "binary": {
-        "path": "/Users/user/tools/metals-v2/start-metals-local-java-aosp"
-      },
       "initialization_options": {
-        "isHttpEnabled": true
+        "isHttpEnabled": true,
       },
       "settings": {
         "startMcpServer": true,
-        "googleJavaFormatStyle": "aosp"
-      }
+        "googleJavaFormatStyle": "aosp",
+      },
     },
-    "intellij-server": {
-      "settings": {
-        "accept_jetbrains_eula": true,
-        "eula_hash": "cd82e6cdaf2790f1",
-        "server_path": "/Users/user/tools/intellij-lsp-zed/launcher/bin/intellij-server",
-        "intellij.dataSharing": "none",
-        "intellij.jdkForSymbolResolution": "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
-      }
-    }
   },
   "languages": {
     "Java": {
-      "language_servers": ["metals", "!intellij-server", "!jdtls"],
+      "language_servers": ["metals", "!jdtls"],
+      "debuggers": ["Metals"],
       "formatter": {
         "language_server": {
-          "name": "metals"
-        }
+          "name": "metals",
+        },
       },
-      "format_on_save": "modifications"
-    }
+      "format_on_save": "modifications",
+    },
   },
   "which_key": {
-    "enabled": true
+    "enabled": true,
   },
   "project_panel": {
     "dock": "left",
@@ -64,6 +58,7 @@
     "provider": "copilot",
   },
   "agent": {
+    "enabled": false,
     "button": false,
     "dock": "right",
     "inline_assistant_model": {
@@ -103,6 +98,10 @@
     "show_branch_name": false,
     "show_branch_status_icon": false,
     "show_worktree_name": false,
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
   },
   "status_bar": {
     "experimental.show": false,

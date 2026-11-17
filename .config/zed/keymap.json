@@ -7,12 +7,6 @@
 // from the command palette.
 [
   {
-    "context": "(Workspace && left_dock == GitPanel) > (Editor || GitPanel || Pane)",
-    "bindings": {
-      "cmd-0": "workspace::ToggleLeftDock",
-    },
-  },
-  {
     "context": "Workspace",
     "bindings": {
       "ctrl-`": "workspace::ToggleAllDocks",
@@ -83,8 +77,8 @@
       "space d b": "editor::ToggleBreakpoint",
       "space d shift-r": "debugger::RerunSession",
       //navigation
-      "[ [": "editor::GoToPreviousHunk",
-      "] ]": "editor::GoToHunk",
+      "[": "editor::GoToPreviousHunk",
+      "]": "editor::GoToHunk",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "alt-j": "editor::MoveLineDown",
@@ -127,12 +121,19 @@
   {
     "bindings": {
       "ctrl-/": "terminal_panel::Toggle",
+      "ctrl-g": "git_panel::ToggleFocus",
     },
   },
   {
     "context": "Editor && (edit_prediction && (showing_completions || in_leading_whitespace))",
     "bindings": {
       "alt-l": "editor::AcceptEditPrediction",
+    },
+  },
+  {
+    "context": "(Workspace && left_dock == GitPanel) > (Editor || Terminal || GitPanel || ProjectPanel || EmptyPane || Pane)",
+    "bindings": {
+      "ctrl-g": "workspace::ToggleLeftDock",
     },
   },
 ]
