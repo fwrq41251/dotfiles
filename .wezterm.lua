@@ -26,9 +26,11 @@ config.font = wezterm.font_with_fallback({
 	--    'Sarasa Gothic SC' 是更纱黑体的简体中文版本名，但它包含完整的 CJK 字符。
 	"Sarasa Gothic SC",
 })
-config.font_size = 11
+config.font_size = 13
 -- config.enable_tab_bar = false
-config.window_decorations = "NONE"
+-- Linux (Omarchy/Hyprland) tiles windows itself, so no decorations are needed.
+-- macOS loses its resize borders with "NONE", so keep "RESIZE" there.
+config.window_decorations = wezterm.target_triple:find("darwin") and "RESIZE" or "NONE"
 
 -- key binding
 config.keys = {
