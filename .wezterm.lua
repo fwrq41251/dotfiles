@@ -18,19 +18,26 @@ end
 -- config.window_background_opacity = 0.95
 
 -- This is where you actually apply your config choices.
--- config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font = wezterm.font_with_fallback({
-	-- 1. 你的首选英文字体/编程字体
-	"JetBrainsMono Nerd Font",
-	-- 2. 备选的 CJK 字体，用来显示中文、日文、韩文
-	--    'Sarasa Gothic SC' 是更纱黑体的简体中文版本名，但它包含完整的 CJK 字符。
-	"Sarasa Gothic SC",
-})
-config.font_size = 13
+local is_macos = wezterm.target_triple:find("darwin") ~= nil
+
+-- Platform differences live here; everything else stays shared.
+local platform = is_macos and {
+	-- 1. 首选英文字体/编程字体
+	-- 2. 备选 CJK 字体，显示中文、日文、韩文
+	--    'Sarasa Gothic SC' 是更纱黑体的简体中文版本名，包含完整 CJK 字符。
+	fonts = { "JetBrainsMono Nerd Font", "Sarasa Gothic SC" },
+	font_size = 13,
+} or {
+	fonts = { "JetBrainsMono Nerd Font", "Sarasa Gothic SC" },
+	font_size = 11,
+}
+
+config.font = wezterm.font_with_fallback(platform.fonts)
+config.font_size = platform.font_size
 -- config.enable_tab_bar = false
 -- Linux (Omarchy/Hyprland) tiles windows itself, so no decorations are needed.
 -- macOS loses its resize borders with "NONE", so keep "RESIZE" there.
-config.window_decorations = wezterm.target_triple:find("darwin") and "RESIZE" or "NONE"
+config.window_decorations = is_macos and "RESIZE" or "NONE"
 
 -- key binding
 config.keys = {
