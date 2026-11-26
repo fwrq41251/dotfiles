@@ -7,8 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "expand_excerpt_lines": 20,
-  "excerpt_context_lines": 10,
+  "suggest_extensions": false,
+  "context_servers": {},
+  "diff_view_style": "split",
+  "expand_excerpt_lines": 50,
+  "excerpt_context_lines": 100,
   "cursor_animation": {
     "enabled": true,
   },
@@ -16,11 +19,21 @@
   "lsp": {
     "metals": {
       "initialization_options": {
-        "isHttpEnabled": true,
+        "isHttpEnabled": false,
       },
       "settings": {
         "startMcpServer": true,
         "googleJavaFormatStyle": "aosp",
+      },
+    },
+    "zls": {
+      // Zed's `settings` do not reach zls 0.16, so point it at the project
+      // config file explicitly (relative to the project root).
+      "binary": {
+        "arguments": ["--config-path", "zls.json"],
+      },
+      "settings": {
+        "enable_build_on_save": true,
       },
     },
   },
@@ -86,7 +99,7 @@
     "dark": "Tokyo Night Storm",
   },
   "git": {
-    "inline_blame": { "enabled": false },
+    "inline_blame": { "enabled": true },
   },
   "toolbar": {
     "breadcrumbs": false,
@@ -95,6 +108,7 @@
     "agent_review": false,
   },
   "title_bar": {
+    "show": "never",
     "show_branch_name": false,
     "show_branch_status_icon": false,
     "show_worktree_name": false,

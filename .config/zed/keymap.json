@@ -29,9 +29,9 @@
     },
   },
   {
-    "context": "Editor && vim_mode == normal && !showing_code_actions && !showing_completions",
+    "context": "CommitDiff > vim_mode == normal",
     "bindings": {
-      "space e": "workspace::ToggleLeftDock",
+      "g space": "git::OpenFileAtHead",
     },
   },
   {
@@ -41,32 +41,57 @@
     },
   },
   {
-    "context": "Editor && mode == full && vim_mode == normal && !showing_code_actions && !showing_completions",
+    "context": "(Editor && vim_mode == normal && !showing_code_actions && !showing_completions) || EmptyPane || (ProjectPanel && not_editing)",
     "bindings": {
-      //space
+      "space e": "project_panel::Toggle",
+      "space p": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "(Editor && mode == full && vim_mode == normal && !showing_code_actions && !showing_completions) || EmptyPane || (ProjectPanel && not_editing)",
+    "bindings": {
       "space space": "file_finder::Toggle",
-      "space /": "workspace::NewSearch",
       "space g g": [
         "task::Spawn",
-        {
-          "task_name": "lazygit",
-          "reveal_target": "center",
-        },
+        { "task_name": "lazygit", "reveal_target": "center" },
       ],
       "space g d": "git::Diff",
       "space g b": "git::Branch",
-      //buffers
+    },
+  },
+  {
+    "context": "(Editor && mode == full && vim_mode == normal && !showing_code_actions && !showing_completions) || EmptyPane",
+    "bindings": {
       "space b o": "pane::CloseOtherItems",
       "space b d": "pane::CloseActiveItem",
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+    },
+  },
+  {
+    "context": "Editor && mode == full && (vim_mode == visual || (vim_mode == normal && !showing_code_actions && !showing_completions))",
+    "bindings": {
+      "space /": "workspace::NewSearch",
+      "space g l": ["task::Spawn", { "task_name": "git: line history" }],
+      "space c a": "editor::ToggleCodeActions",
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+    },
+  },
+  {
+    "context": "Editor && mode == full && vim_mode == normal && !showing_code_actions && !showing_completions",
+    "bindings": {
       "space s s": "outline::Toggle",
       //goto
       "g t": "editor::GoToTypeDefinition",
-      "g r": "editor::FindAllReferences",
+      "g r r": [
+        "editor::FindAllReferences",
+        { "always_open_multibuffer": false },
+      ],
       "g h": "call_hierarchy::ShowIncomingCalls",
-      "shift-k": "editor::GoToDefinition",
+      "shift-k": ["editor::GoToDefinition", { "open_results_in": "picker" }],
       //code
       "space c r": "editor::Rename",
-      "space c a": "editor::ToggleCodeActions",
       "space c f": "editor::Format",
       "space c i": "editor::GoToImplementation",
       //run
@@ -76,52 +101,17 @@
       "space d r": "debugger::Rerun",
       "space d b": "editor::ToggleBreakpoint",
       "space d shift-r": "debugger::RerunSession",
-      //navigation
-      "[": "editor::GoToPreviousHunk",
-      "]": "editor::GoToHunk",
-      "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-      "alt-j": "editor::MoveLineDown",
-      "alt-k": "editor::MoveLineUp",
-      //others
-      "f2": "editor::GoToDiagnostic",
-    },
-  },
-  {
-    "context": "Editor && mode == full && vim_mode == visual",
-    "bindings": {
-      "space c a": "editor::ToggleCodeActions",
-      "alt-j": "editor::MoveLineDown",
-      "alt-k": "editor::MoveLineUp",
-      "/": "workspace::NewSearch",
-    },
-  },
-  {
-    "context": "EmptyPane",
-    "bindings": {
-      "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-      "space b d": "pane::CloseActiveItem",
-      "space b o": "pane::CloseOtherItems",
-    },
-  },
-  {
-    "context": "EmptyPane || (ProjectPanel && not_editing)",
-    "bindings": {
-      "space space": "file_finder::Toggle",
-      "space g g": [
-        "task::Spawn",
-        { "task_name": "lazygit", "reveal_target": "center" },
-      ],
-      "space g d": "git::Diff",
-      "space g b": "git::Branch",
-      "space e": "workspace::ToggleLeftDock",
     },
   },
   {
     "bindings": {
       "ctrl-/": "terminal_panel::Toggle",
-      "ctrl-g": "git_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "(Editor && vim_mode == normal && !showing_code_actions && !showing_completions) || EmptyPane || (ProjectPanel && not_editing) || (GitPanel && !CommitEditor && !GitBranchSelector && !GitRepositorySelector)",
+    "bindings": {
+      "space v": "git_panel::ToggleFocus",
     },
   },
   {
@@ -131,9 +121,9 @@
     },
   },
   {
-    "context": "(Workspace && left_dock == GitPanel) > (Editor || Terminal || GitPanel || ProjectPanel || EmptyPane || Pane)",
+    "context": "(Workspace && left_dock == GitPanel) > ((Editor && vim_mode == normal && !showing_code_actions && !showing_completions) || EmptyPane || (ProjectPanel && not_editing) || (GitPanel && !CommitEditor && !GitBranchSelector && !GitRepositorySelector))",
     "bindings": {
-      "ctrl-g": "workspace::ToggleLeftDock",
+      "space v": "workspace::ToggleLeftDock",
     },
   },
 ]
